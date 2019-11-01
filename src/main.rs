@@ -2,7 +2,7 @@ use std::io::Write;
 use std::error::Error;
 use console::{Key, Term};
 
-fn line_input(query: &'static str, default: &'static str) -> Result<(String), Box<dyn Error>> {
+fn line_input(query: &str, default: &str) -> Result<(String), Box<dyn Error>> {
 	let mut buf = String::from(default);
 	let mut term = Term::stdout();
 	let mut clear = true;
@@ -38,6 +38,9 @@ fn line_input(query: &'static str, default: &'static str) -> Result<(String), Bo
 
 fn main() -> Result<(), Box<dyn Error>> {
 	let res = line_input("What is your name?", "Cat").expect("not to fail");
+	println!("Got input: {}", res);
+	println!("Hello {}", res);
+	let res = line_input("What is your name of your pet?", &res).expect("not to fail");
 	println!("Got input: {}", res);
 	Ok(())
 }
